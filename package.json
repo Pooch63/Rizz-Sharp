@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@types/node": "^22.13.14",
+    "chalk": "^5.4.1",
+    "fs": "^0.0.1-security",
+    "jsesc": "^3.1.0",
+    "util": "^0.12.5"
+  }
+}
