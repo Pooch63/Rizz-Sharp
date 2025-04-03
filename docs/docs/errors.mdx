@@ -1,0 +1,54 @@
+---
+sidebar_position: 3
+---
+
+# Errors
+
+Sometimes, even sigma males mess up. You might get a runtime error you need to deal with. It happens.
+
+Here's an example:
+
+```text title="prog.rizzler"
+fanum_tax value be 1;
+// highlight-start
+alpha vlue;
+// highlight-end
+```
+
+The runtime doesn't know what the hell `vlue` means, so it throws an error. If you want to handle this error
+on your own, we can `cringe` out of some `sus`sybacka code:
+
+```text title="prog.rizzler"
+sus {
+    alpha (this_variable_doesnt_exist);
+} cringe (err) {
+    alpha "No shit." + err;
+}
+```
+
+Outputs
+
+```text
+No shit. Error: Variable "this_variable_doesnt_exist" doesn't exist.
+```
+
+:::warning
+Lowkey, using `sus cringe` blocks in production code is honestly kinda cringe.
+:::
+
+Or, maybe we need to throw an error and then catch it later.
+Let's `yeet` an issue at the `cringe` block:
+
+```text title="prog.rizzler"
+sus {
+    yeet "This is a user-defined error.";
+} cringe (err) {
+    alpha "Some kind of error occurred, ig";
+}
+```
+
+Outputs
+
+```text
+Some kind of error occurred, ig
+```
