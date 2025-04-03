@@ -1,4 +1,4 @@
-import chalk from "chalk";
+const chalk = require("chalk");
 
 export type Position = {
   line: number;
@@ -6,12 +6,11 @@ export type Position = {
   length: number;
 };
 
-const pos = (x: number) => Math.max(0, x);
 function format_error(
   lines: string[],
   position: Position,
   error: string,
-  type: "error" | "warning"
+  header: string
 ): string {
   const line = lines[position.line - 1] || "";
   const pos_info = `${position.line}:${position.col} |  `;
@@ -22,23 +21,21 @@ function format_error(
   for (let i = 0; i < position.length; i += 1) {
     indicator += "^";
   }
-  return `${
-    type == "error" ? chalk.red("error:") : chalk.yellow("warning:")
-  } ${error}\n${pos_info}${line}\n${indicator}`;
+  return `${header} ${error}\n${pos_info}${line}\n${indicator}`;
 }
 
 export function error(
   lines: string[],
   position: Position,
   message: string
-): void {
-  console.error(format_error(lines, position, message, "error"));
+): string {
+  return format_error(lines, position, message, chalk.red("error:"));
 }
 
 export function warning(
   lines: string[],
   position: Position,
   message: string
-): void {
-  console.warn(format_error(lines, position, message, "warning"));
+): string {
+  return format_error(lines, position, message, chalk.yellow("warning:"));
 }

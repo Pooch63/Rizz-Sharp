@@ -5,5 +5,34 @@
     "fs": "^0.0.1-security",
     "jsesc": "^3.1.0",
     "util": "^0.12.5"
-  }
+  },
+  "name": "rizz-sharp",
+  "description": "An esolang designed for alphas",
+  "version": "0.7.0",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pooch63/rizz-sharp.git"
+  },
+  "keywords": [
+    "esolang",
+    "typescript",
+    "rizzlang",
+    "rizz-sharp",
+    "sharp",
+    "language"
+  ],
+  "author": "Kiyaan Pillai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pooch63/rizz-sharp/issues"
+  },
+  "homepage": "https://github.com/pooch63/rizz-sharp#readme"
 }

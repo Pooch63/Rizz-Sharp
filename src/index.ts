@@ -2,16 +2,24 @@ import { Parser } from "./parser";
 import { Scanner } from "./tokens";
 import { Walker } from "./walker";
 import fs from "fs";
-import chalk from "chalk";
 
-export function run(input: string) {
+const chalk = require("chalk");
+
+export function run(input: string): {
+  error: string | null;
+} {
   let scanner = new Scanner(input);
   let parser = new Parser(scanner);
 
-  let ast = parser.parse();
-  if (parser.had_error) return;
+  let { error, ast } = parser.parse();
+  if (error?.length > 0) return { error };
 
-  new Walker().walk(ast);
+  try {
+    new Walker().walk(ast);
+    return { error: null };
+  } catch (err) {
+    return { error: err };
+  }
 }
 
 function process_args(args: string[]): {
@@ -38,7 +46,8 @@ function process_args(args: string[]): {
 
   return { output: "Run --help for more information", error: null };
 }
-function main() {
+
+async function main() {
   let args = process.argv;
 
   const output = process_args(args);
@@ -49,4 +58,3 @@ function main() {
     console.log(output.output);
   }
 }
-main();

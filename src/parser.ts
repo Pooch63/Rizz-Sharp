@@ -208,15 +208,14 @@ export class Parser {
   public scanner: Scanner;
   private _curr: Token;
   private _last: Token;
-  public had_error: boolean = false;
+  public error_string: string = "";
   constructor(scanner: Scanner) {
     this.scanner = scanner;
     this._curr = scanner.next();
   }
 
   public error(position: Position, err: string) {
-    this.had_error = true;
-    error(this.scanner.lines, position, err);
+    this.error_string += error(this.scanner.lines, position, err);
   }
 
   private last() {
@@ -480,7 +479,7 @@ export class Parser {
         return expr;
     }
   }
-  parse(): ASTBody {
+  parse(): { error: string | null; ast: ASTBody } {
     let statement = new ASTBody();
     while (!this.scanner.at_EOF()) {
       let node = this.parse_statement(true);
@@ -488,6 +487,9 @@ export class Parser {
         statement.statements.push(node);
       }
     }
-    return statement;
+    return {
+      error: this.error_string == "" ? null : this.error_string,
+      ast: statement,
+    };
   }
 }

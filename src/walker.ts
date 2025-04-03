@@ -83,7 +83,7 @@ export class Walker {
   }
 
   // Go through blocks, if there is a try catch block, stop
-  private error(err: string) {
+  private error(err: string): never {
     this.had_error = true;
     throw new Error(err);
   }
@@ -190,7 +190,7 @@ export class Walker {
     return NULL;
   }
 
-  public walk(node: ASTNode): Value {
+  public walk(node: ASTNode): Value | never {
     // Keep track of scope count, if it goes back,
     // then we've exited the scope
     let start_scope_count = this.scopes.length;
