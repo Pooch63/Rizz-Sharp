@@ -19,6 +19,24 @@ If you do, you'll need
 
 Alternatively, go to the [playground](https://pooch63.github.io/rizz/playground) to test the language out.
 
+## Running a program
+
+Using TypeScript, run the program with
+
+```typescript
+import { run } from "@pooch63/rizz-sharp";
+
+const output = run(`
+fanum_tax v be 1;
+alpha (v be 3);
+`);
+if (output.error != null) {
+  throw new Error(done.error);
+}
+```
+
+We'll see what that means, and way more, in the next sections.
+
 ### Files
 
 Rizz# files follow the `.rizzler` extension, which stands for **RIZZL**anguag**ER**untime.
