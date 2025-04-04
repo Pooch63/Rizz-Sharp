@@ -1,0 +1,21 @@
+{
+  "type": "bar",
+  "data": {
+    "datasets": [
+      {
+        "data": [2.42, 0.01571],
+        "backgroundColor": ["rgb(100, 100, 240)", "rgb(0, 100, 100)"],
+        "label": "Print Ten Thousand Characters to Console"
+      }
+    ],
+    "labels": ["Time in Rizz# (s)", "Time in JavaScript Times (ms)"]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true,
+        "max": 100
+      }
+    }
+  }
+}
