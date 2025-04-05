@@ -27,15 +27,27 @@ function format_error(
 export function error(
   lines: string[],
   position: Position,
-  message: string
+  message: string,
+  color: boolean
 ): string {
-  return format_error(lines, position, message, chalk.red("error:"));
+  return format_error(
+    lines,
+    position,
+    message,
+    color ? chalk.red("error:") : "error:"
+  );
 }
 
 export function warning(
   lines: string[],
   position: Position,
-  message: string
+  message: string,
+  color: boolean
 ): string {
-  return format_error(lines, position, message, chalk.yellow("warning:"));
+  return format_error(
+    lines,
+    position,
+    message,
+    color ? chalk.yellow("warning:") : "warning:"
+  );
 }

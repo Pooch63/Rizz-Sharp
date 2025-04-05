@@ -245,7 +245,6 @@ export class Walker {
         let print = node as ASTPrint;
         let output = to_string(this.walk(print.value));
         if (this.overloads.print) {
-          console.log(this.overloads.print);
           let { error } = this.overloads.print(output);
           if (error != null) this.error(error);
         } else console.log(output);

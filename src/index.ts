@@ -1,18 +1,19 @@
 import { Parser } from "./parser";
 import { Scanner } from "./tokens";
-import { type Overloads, Walker } from "./walker";
-import fs from "fs";
+import { Walker } from "./walker";
 
-const chalk = require("chalk");
+import { type Overloads } from "./walker";
+export { type Overloads } from "./walker";
 
 export function run(
   input: string,
+  add_color: boolean = false,
   overloads: Overloads | null
 ): {
   error: string | null;
 } {
-  let scanner = new Scanner(input);
-  let parser = new Parser(scanner);
+  let scanner = new Scanner(input, add_color);
+  let parser = new Parser(scanner, add_color);
 
   let { error, ast } = parser.parse();
   if (error?.length > 0) return { error };
@@ -22,42 +23,5 @@ export function run(
     return { error: null };
   } catch (err) {
     return { error: err };
-  }
-}
-
-function process_args(args: string[]): {
-  output: string | null;
-  error: string | null;
-} {
-  if (args.length == 2) {
-    return { output: "Run --help for more information", error: null };
-  }
-  if (args[2] == "run") {
-    if (args.length == 3) {
-      return { output: null, error: "run expects a file to run" };
-    }
-    let path = args[3];
-    let file: string;
-    try {
-      file = fs.readFileSync(path).toString();
-    } catch (error) {
-      return { output: null, error: `Could not find file ${path}` };
-    }
-    run(file, {});
-    return { output: null, error: null };
-  }
-
-  return { output: "Run --help for more information", error: null };
-}
-
-async function main() {
-  let args = process.argv;
-
-  const output = process_args(args);
-  if (output.error != null) {
-    console.log(chalk.red(`error: `) + output.error);
-  }
-  if (output.output != null) {
-    console.log(output.output);
   }
 }

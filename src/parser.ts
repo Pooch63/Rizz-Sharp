@@ -208,14 +208,21 @@ export class Parser {
   public scanner: Scanner;
   private _curr: Token;
   private _last: Token;
+  private add_color: boolean = false;
   public error_string: string = "";
-  constructor(scanner: Scanner) {
+  constructor(scanner: Scanner, add_color: boolean) {
     this.scanner = scanner;
     this._curr = scanner.next();
+    this.add_color = add_color;
   }
 
   public error(position: Position, err: string) {
-    this.error_string += error(this.scanner.lines, position, err);
+    this.error_string += error(
+      this.scanner.lines,
+      position,
+      err,
+      this.add_color
+    );
   }
 
   private last() {

@@ -86,8 +86,10 @@ export class Scanner {
   private _line: number = 1;
   private _col: number = 0;
   private input: string;
+  private add_color: boolean;
   public lines: string[];
-  constructor(input: string) {
+  constructor(input: string, add_color: boolean) {
+    this.add_color = add_color;
     this.input = input;
     this.lines = this.input.split("\n");
   }
@@ -236,7 +238,8 @@ export class Scanner {
             col: this.col(),
             length: 1,
           },
-          `Expected closing quote ${quote} to string`
+          `Expected closing quote ${quote} to string`,
+          this.add_color
         );
       }
       return { type: "string", value: str, position: pos };
@@ -256,7 +259,14 @@ export class Scanner {
       return { type: "identifier", value: identifier, position: pos };
     }
 
-    error(this.lines, this.get_position(1), `Unexpected character ${curr}`);
+    console.log(
+      error(
+        this.lines,
+        this.get_position(1),
+        `Unexpected character ${curr}`,
+        this.add_color
+      )
+    );
     this.advance();
     return { type: "error", position: this.get_position(0) };
   }
