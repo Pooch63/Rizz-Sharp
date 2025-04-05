@@ -18,6 +18,10 @@ import {
   Binop,
 } from "./ast";
 
+export type Overloads = {
+  print?: (output: string) => { error: string | null };
+};
+
 type Number = { type: "number"; number: number };
 type Boolean = { type: "boolean"; value: boolean };
 type String = { type: "string"; value: string };
@@ -63,6 +67,11 @@ export class Walker {
   private break_fired = false;
   // So that while, for, etc. can control what scope is created next
   private next_scope_type: ScopeType = ScopeType.BLOCK;
+  private overloads: Overloads;
+
+  constructor(overloads: Overloads) {
+    this.overloads = overloads;
+  }
 
   // Break up through every
   private fire_break() {
@@ -234,7 +243,12 @@ export class Walker {
       }
       case ASTType.PRINT: {
         let print = node as ASTPrint;
-        console.log(to_string(this.walk(print.value)));
+        let output = to_string(this.walk(print.value));
+        if (this.overloads.print) {
+          console.log(this.overloads.print);
+          let { error } = this.overloads.print(output);
+          if (error != null) this.error(error);
+        } else console.log(output);
         return NULL;
       }
       case ASTType.UNARY:

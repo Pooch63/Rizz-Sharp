@@ -1,11 +1,14 @@
 import { Parser } from "./parser";
 import { Scanner } from "./tokens";
-import { Walker } from "./walker";
+import { type Overloads, Walker } from "./walker";
 import fs from "fs";
 
 const chalk = require("chalk");
 
-export function run(input: string): {
+export function run(
+  input: string,
+  overloads: Overloads | null
+): {
   error: string | null;
 } {
   let scanner = new Scanner(input);
@@ -15,7 +18,7 @@ export function run(input: string): {
   if (error?.length > 0) return { error };
 
   try {
-    new Walker().walk(ast);
+    new Walker(overloads ?? {}).walk(ast);
     return { error: null };
   } catch (err) {
     return { error: err };
@@ -40,7 +43,7 @@ function process_args(args: string[]): {
     } catch (error) {
       return { output: null, error: `Could not find file ${path}` };
     }
-    run(file);
+    run(file, {});
     return { output: null, error: null };
   }
 
