@@ -48,27 +48,28 @@ const commands: Process[] = [
       // Compile everything
       "npx tsc",
       // Delete unnecessary .d.ts files
-      (os: NodeJS.Platform) => {
-        let dir = path.resolve(__dirname, "lib");
+      // For now, I actually want to keep all these .d.ts files
+      //   (os: NodeJS.Platform) => {
+      //     let dir = path.resolve(__dirname, "lib");
 
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-          return;
-        }
+      //     if (!fs.existsSync(dir)) {
+      //       fs.mkdirSync(dir, { recursive: true });
+      //       return;
+      //     }
 
-        const files = fs.readdirSync(dir);
-        for (const file of files) {
-          const full = path.join(dir, file);
+      //     const files = fs.readdirSync(dir);
+      //     for (const file of files) {
+      //       const full = path.join(dir, file);
 
-          if (
-            file.endsWith(".d.ts") &&
-            file !== "index.d.ts" &&
-            fs.statSync(full).isFile()
-          ) {
-            fs.unlinkSync(full);
-          }
-        }
-      },
+      //       if (
+      //         file.endsWith(".d.ts") &&
+      //         file !== "index.d.ts" &&
+      //         fs.statSync(full).isFile()
+      //       ) {
+      //         fs.unlinkSync(full);
+      //       }
+      //     }
+      //   },
     ],
   },
   {

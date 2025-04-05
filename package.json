@@ -3,14 +3,14 @@
     "@pooch63/build-tool-helper": "^0.9.6",
     "@types/node": "^22.13.14",
     "chalk": "^5.4.1",
-    "fs": "^0.0.1-security",
     "jsesc": "^3.1.0",
     "prompt-sync": "^4.2.0",
+    "rizz-sharp": "^0.7.4",
     "util": "^0.12.5"
   },
   "name": "rizz-sharp",
   "description": "An esolang designed for alphas",
-  "version": "0.7.1",
+  "version": "0.7.5",
   "main": "lib/index.js",
   "directories": {
     "lib": "lib"
@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/pooch63/rizz-sharp#readme",
   "devDependencies": {
-    "@types/prompt-sync": "^4.2.3"
+    "@types/prompt-sync": "^4.2.3",
+    "fs": "^0.0.1-security"
   }
 }
